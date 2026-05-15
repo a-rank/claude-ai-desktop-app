@@ -55,7 +55,7 @@ const UPDATE_CHECK_MS = 3_600_000;
 const DOMAIN_CACHE_MAX = 50;
 
 // Live-Notification-System (GitHub-hosted JSON)
-const NOTIFICATIONS_URL = 'https://raw.githubusercontent.com/simonlinuxcraft/claude-ai-desktop-app/main/notifications.json';
+const NOTIFICATIONS_URL = 'https://raw.githubusercontent.com/a-rank/claude-ai-desktop-app/main/notifications.json';
 const NOTIFICATIONS_FETCH_MS = 6 * 60 * 60 * 1000;        // alle 6h
 const NOTIFICATIONS_FIRST_FETCH_DELAY_MS = 8 * 1000;       // nach App-Start 8s warten
 const NOTIFICATION_BANNER_HEIGHT = 64;
@@ -3020,12 +3020,7 @@ function updateMenu(force = false) {
         { type: 'separator' },
         { label: `Design: ${customDesign ? 'Modern' : 'Classic'}`, click: toggleDesign },
         { label: t('Nach Updates suchen\u2026', 'Check for Updates\u2026'), click: () => {
-          if (isDev) {
-            showCustomMessageBox({ type: 'info', title: 'Claude', message: t('Updates sind im Entwicklungsmodus deaktiviert.', 'Updates are disabled in development mode.') });
-            return;
-          }
-          manualUpdateCheck = true;
-          autoUpdater.checkForUpdates().catch(() => {});
+          showCustomMessageBox({ type: 'info', title: 'Claude', message: t('Auto-Updates sind deaktiviert.', 'Auto-updates are disabled.') });
         }},
         { label: (bugReportStrings[sysLang] || bugReportStrings.en).title, click: showBugReportDialog },
         { type: 'separator' },
@@ -3236,6 +3231,8 @@ autoUpdater.autoInstallOnAppQuit = true;
 let manualUpdateCheck = false;
 
 function setupAutoUpdater() {
+  return;
+  // eslint-disable-next-line no-unreachable
   if (isDev) return;
   let failures = 0;
 
@@ -4116,12 +4113,7 @@ ipcMain.on('appmenu-action', (event, name) => {
     case 'design-toggle': toggleDesign(); break;
     case 'settings': openSettingsWindow(); break;
     case 'check-updates':
-      if (isDev) {
-        showCustomMessageBox({ type: 'info', title: 'Claude', message: t('Updates sind im Entwicklungsmodus deaktiviert.', 'Updates are disabled in development mode.') });
-      } else {
-        manualUpdateCheck = true;
-        autoUpdater.checkForUpdates().catch(() => {});
-      }
+      showCustomMessageBox({ type: 'info', title: 'Claude', message: t('Auto-Updates sind deaktiviert.', 'Auto-updates are disabled.') });
       break;
     case 'bug-report': showBugReportDialog(); break;
     case 'copy-diagnostics': copyDiagnosticsInfo(); break;
