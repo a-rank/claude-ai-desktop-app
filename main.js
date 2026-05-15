@@ -55,7 +55,7 @@ const UPDATE_CHECK_MS = 3_600_000;
 const DOMAIN_CACHE_MAX = 50;
 
 // Live-Notification-System (GitHub-hosted JSON)
-const NOTIFICATIONS_URL = 'https://raw.githubusercontent.com/simonlinuxcraft/claude-ai-desktop-app/main/notifications.json';
+const NOTIFICATIONS_URL = 'https://raw.githubusercontent.com/a-rank/claude-ai-desktop-app/main/notifications.json';
 const NOTIFICATIONS_FETCH_MS = 6 * 60 * 60 * 1000;        // alle 6h
 const NOTIFICATIONS_FIRST_FETCH_DELAY_MS = 8 * 1000;       // nach App-Start 8s warten
 const NOTIFICATION_BANNER_HEIGHT = 64;
